@@ -8,7 +8,7 @@ export class ListBookController implements Controller {
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-            const books = this.bookRepository.list();
+            const books = await this.bookRepository.list();
 
             return ok(books);
         } catch(error: any) {
