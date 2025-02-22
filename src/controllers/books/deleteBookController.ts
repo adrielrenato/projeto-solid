@@ -11,9 +11,10 @@ export class DeleteBookController implements Controller {
             const { id } = httpRequest.params;
             const bookExists = await this.bookRepository.delete(id);
 
-            if (!bookExists) {
+            if (!bookExists.affected) {
                 return notFound('Livro');
             } 
+            
             return noContent();
         } catch (error: any) {
             return serverError(error);
