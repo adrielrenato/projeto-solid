@@ -6,8 +6,8 @@ export class Book {
     id?: string;
 
     @Column() // TypeORM assume 'varchar' automaticamente para strings
-    name!: string;
+    name?: string;
 
     @Column({ type: "text" }) // Use "text" para descrições longas
-    description!: string;
+    description?: string;
 }

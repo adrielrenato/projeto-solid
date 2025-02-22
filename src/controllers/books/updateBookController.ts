@@ -12,7 +12,7 @@ export class UpdateBookController implements Controller {
             const { name, description } = httpRequest.body;
             const bookExists = await this.bookRepository.update(id, { name, description });
 
-            if (!bookExists) {
+            if (!bookExists.affected) {
                 return notFound('Livro');
             }
 
