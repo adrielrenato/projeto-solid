@@ -5,8 +5,8 @@ import { IBookRepository } from "./interfaces/interfaceBookRepository";
 export class BookRepository implements IBookRepository {
     private readonly bookRepository = AppDataSources.getRepository(Book);
 
-    list(): Promise<Book[] | null> {
-        throw new Error("Method not implemented.");
+    async list(): Promise<Book[] | null> {
+        return await this.bookRepository.find();
     }
 
     async create(book: Book): Promise<Book> {
