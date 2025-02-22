@@ -1,0 +1,43 @@
+# Dependências do Node.js
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Compilação do TypeScript
+dist/
+build/
+out/
+*.js
+*.js.map
+*.d.ts
+
+# Configuração do TypeScript (caso queira personalizar localmente)
+tsconfig.tsbuildinfo
+
+# Configurações do Editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Logs e arquivos temporários
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente (se houver)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Cachês e dependências do sistema
+.cache/
+.npm/
+.pnp/
+.pnp.js
