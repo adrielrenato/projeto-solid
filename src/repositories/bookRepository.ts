@@ -9,4 +9,7 @@ export class BookRepository implements IBookRepository {
         return await this.bookRepository.save(book);
     }
 
+    delete(id: string): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 }
