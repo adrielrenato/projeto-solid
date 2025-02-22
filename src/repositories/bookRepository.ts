@@ -1,4 +1,4 @@
-import { DeleteResult } from "typeorm";
+import { DeleteResult, UpdateResult } from "typeorm";
 import { AppDataSources } from "../database/data-source";
 import { Book } from "../models/book";
 import { IBookRepository } from "./interfaces/interfaceBookRepository";
@@ -16,6 +16,20 @@ export class BookRepository implements IBookRepository {
 
     async create(book: Book): Promise<Book> {
         return await this.bookRepository.save(book);
+    }
+
+     async update(id: string, book: Book): Promise<UpdateResult> {
+        const updateField: Book = {};
+
+        if (book.name) {
+            updateField.name = book.name;
+        }
+
+        if (book.description) {
+            updateField.description = book.description;
+        }
+
+        return await this.bookRepository.update(id, book);
     }
 
     async delete(id: string): Promise<DeleteResult> {
