@@ -1,3 +1,4 @@
+import { DeleteResult } from "typeorm";
 import { AppDataSources } from "../database/data-source";
 import { Book } from "../models/book";
 import { IBookRepository } from "./interfaces/interfaceBookRepository";
@@ -9,7 +10,7 @@ export class BookRepository implements IBookRepository {
         return await this.bookRepository.save(book);
     }
 
-    delete(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
+    async delete(id: string): Promise<DeleteResult> {
+        return await this.bookRepository.delete(id);
     }
 }

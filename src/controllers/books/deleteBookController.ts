@@ -9,7 +9,7 @@ export class DeleteBookController implements Controller {
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
             const { id } = httpRequest.params;
-            const bookExists = this.bookRepository.delete(id);
+            const bookExists = await this.bookRepository.delete(id);
 
             if (!bookExists) {
                 return notFound('Livro');
