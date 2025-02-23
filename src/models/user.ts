@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
+@Entity()
 export class User {
     @PrimaryGeneratedColumn('uuid')
     id?: string;
@@ -10,7 +11,7 @@ export class User {
     @Column()
     email?: string;
 
-    @Column()
+    @Column({ select: false })
     password?: string;
 
     @CreateDateColumn()

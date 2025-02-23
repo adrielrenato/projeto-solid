@@ -20,7 +20,7 @@ export class RegisterUserController implements Controller {
 
             const { username, email, password } = httpRequest.body;
 
-            const user = this.authRepository.register({ username, email, password });
+            const user = await this.authRepository.register({ username, email, password });
 
             return created(user);
         } catch(error: any) {
