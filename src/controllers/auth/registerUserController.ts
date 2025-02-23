@@ -2,12 +2,14 @@ import { Controller } from "../../interfaces/controller";
 import { HttpRequest, HttpResponse } from "../../interfaces/http";
 import { Validation } from "../../interfaces/validation";
 import { IAuthRepository } from "../../repositories/interfaces/interfaceAuthRepository";
-import { badRequest, created, serverError } from "../../utils/httpResponses/httpResponse";
+import { IUserRepository } from "../../repositories/interfaces/interfaceUserRepository";
+import { badRequest, conflict, created, serverError } from "../../utils/httpResponses/httpResponse";
 
 export class RegisterUserController implements Controller {
     constructor(
         private readonly authRepository: IAuthRepository,
-        private readonly validation: Validation
+        private readonly validation: Validation,
+        private readonly userRepository: IUserRepository
     ) {}
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -19,6 +21,15 @@ export class RegisterUserController implements Controller {
             }
 
             const { username, email, password } = httpRequest.body;
+
+            const userExists = await this.userRepository.getByColumn([
+                { email },
+                { username }
+            ]);
+
+            if (userExists) {
+                return conflict('Email ou username já cadastrados!');
+            }
 
             const user = await this.authRepository.register({ username, email, password });
 
