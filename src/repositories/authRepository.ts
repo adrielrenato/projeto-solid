@@ -6,7 +6,7 @@ import bcryptjs from "bcryptjs";
 export class AuthRepository implements IAuthRepository {
     private readonly authRepository = AppDataSources.getRepository(User);
 
-    async login(usernameOrEmail: string, password: string): Promise<void> {
+    async login(usernameOrEmail: string, password: string): Promise<string> {
         throw new Error("Method not implemented.");
     }
 
@@ -18,5 +18,5 @@ export class AuthRepository implements IAuthRepository {
 
         return userCreated;
     }
-
+    
 }
