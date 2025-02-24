@@ -1,4 +1,4 @@
-import { UpdateResult } from "typeorm";
+import { DeleteResult, UpdateResult } from "typeorm";
 import { Author } from "../../models/author";
 
 export interface IAuthorRepository {
@@ -6,4 +6,5 @@ export interface IAuthorRepository {
     getById(id: string): Promise<Author | null>;
     create(author: Author): Promise<Author>;
     update(id: string, book: Author): Promise<UpdateResult>;
+    delete(id: string): Promise<DeleteResult>;
 }

@@ -2,6 +2,7 @@ import { UpdateResult } from "typeorm";
 import { AppDataSources } from "../database/data-source";
 import { Author } from "../models/author";
 import { IAuthorRepository } from "./interfaces/interfaceAuthorRepository";
+import { DeleteResult } from "typeorm/browser";
 
 export class AuthorRepository implements IAuthorRepository {
     private readonly authorRepository = AppDataSources.getRepository(Author);
@@ -32,4 +33,7 @@ export class AuthorRepository implements IAuthorRepository {
             return await this.authorRepository.update(id, updateField);
         }    
     
+        async delete(id: string): Promise<DeleteResult> {
+                return await this.authorRepository.delete(id);
+            }
 }
