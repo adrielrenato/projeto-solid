@@ -20,7 +20,8 @@ export class AddBookController implements Controller {
 
             const { name, description } = httpRequest.body;
 
-            const book = this.bookRepository.create({ name, description });
+            const book = await this.bookRepository.create({ name, description });
+            
             return created(book);
         } catch(error: any) {
             return serverError(error);
