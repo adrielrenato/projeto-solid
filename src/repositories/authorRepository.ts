@@ -1,3 +1,4 @@
+import { UpdateResult } from "typeorm";
 import { AppDataSources } from "../database/data-source";
 import { Author } from "../models/author";
 import { IAuthorRepository } from "./interfaces/interfaceAuthorRepository";
@@ -16,5 +17,19 @@ export class AuthorRepository implements IAuthorRepository {
     async create(author: Author): Promise<Author> {
         return await this.authorRepository.save(author);
     }
+
+    async update(id: string, author: Author): Promise<UpdateResult> {
+            const updateField: Author = {};
+        
+            if (author.name) {
+                updateField.name = author.name;
+            }
+        
+            if (author.nationality) {
+                updateField.nationality = author.nationality;
+            }
+        
+            return await this.authorRepository.update(id, updateField);
+        }    
     
 }
