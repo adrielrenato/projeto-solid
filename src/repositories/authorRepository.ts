@@ -9,6 +9,10 @@ export class AuthorRepository implements IAuthorRepository {
         return await this.authorRepository.find(); 
     }
 
+     async getById(id: string): Promise<Author | null> {
+            return await this.authorRepository.findOneBy({ id });
+        }
+
     async create(author: Author): Promise<Author> {
         return await this.authorRepository.save(author);
     }
