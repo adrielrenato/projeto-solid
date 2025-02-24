@@ -1,10 +1,10 @@
 import { Controller } from "../../interfaces/controller";
 import { HttpRequest, HttpResponse } from "../../interfaces/http";
-import { IAuthRepository } from "../../repositories/interfaces/interfaceAuthRepository";
+import { IAuthorRepository } from "../../repositories/interfaces/interfaceAuthorRepository";
 import { ok, serverError } from "../../utils/httpResponses/httpResponse";
 
 export class ListAuthorController implements Controller {
-    constructor(private readonly authorRepository: IAuthRepository) {}
+    constructor(private readonly authorRepository: IAuthorRepository) {}
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
             try {
