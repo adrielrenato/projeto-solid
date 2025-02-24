@@ -1,7 +1,6 @@
 import { User } from "../../models/user";
 
 export interface IAuthRepository {
-    list(): unknown;
-    login(usernameOrEmail: string, password: string): Promise<void>;
+    login(usernameOrEmail: string, password: string): Promise<string>;
     register(user: User): Promise<User>;
 }
