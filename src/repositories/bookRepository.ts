@@ -18,19 +18,19 @@ export class BookRepository implements IBookRepository {
         return await this.bookRepository.save(book);
     }
 
-     async update(id: string, book: Book): Promise<UpdateResult> {
+    async update(id: string, book: Book): Promise<UpdateResult> {
         const updateField: Book = {};
-
+    
         if (book.name) {
             updateField.name = book.name;
         }
-
+    
         if (book.description) {
             updateField.description = book.description;
         }
-
-        return await this.bookRepository.update(id, book);
-    }
+    
+        return await this.bookRepository.update(id, updateField);
+    }    
 
     async delete(id: string): Promise<DeleteResult> {
         return await this.bookRepository.delete(id);
