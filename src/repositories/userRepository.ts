@@ -9,6 +9,10 @@ export class UserRepository implements IUserRepository {
             return await this.userRepository.find(); 
         }
 
+        async getById(id: string): Promise<User | null> {
+                    return await this.userRepository.findOneBy({ id });
+                }
+
     async getByColumn(where: object): Promise<User | null> {
         return await this.userRepository.findOneBy(where);
     }
