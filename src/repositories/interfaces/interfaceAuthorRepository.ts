@@ -5,6 +5,6 @@ export interface IAuthorRepository {
     list(): Promise<Author[] | null>;
     getById(id: string): Promise<Author | null>;
     create(author: Author): Promise<Author>;
-    update(id: string, book: Author): Promise<UpdateResult>;
+    update(id: string, author: Author): Promise<UpdateResult>;
     delete(id: string): Promise<DeleteResult>;
 }

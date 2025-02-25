@@ -11,6 +11,8 @@ export class AuthRepository implements IAuthRepository {
     }
 
     async register(user: User): Promise<User> {
+        user.username = (user.username as string).toLowerCase();
+        user.email = (user.email as string).toLowerCase();
         user.password = await bcryptjs.hash(user.password as string, 8);
         
         const userCreated = await this.authRepository.save(user);
