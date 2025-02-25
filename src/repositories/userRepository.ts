@@ -35,7 +35,7 @@ export class UserRepository implements IUserRepository {
         const updateField: User = {};
 
         if (user.email) {
-            updateField.email = user.email.toLowerCase();
+            updateField.email = user.email;
         }
 
         if (user.password) {
@@ -43,7 +43,7 @@ export class UserRepository implements IUserRepository {
         }
 
         if (user.username) {
-            updateField.username = user.username.toLowerCase();
+            updateField.username = user.username;
         }
 
         return await this.userRepository.update(id, updateField);

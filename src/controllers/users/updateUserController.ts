@@ -21,7 +21,9 @@ export class UpdateUserController implements Controller {
             }
 
             const { id } = httpRequest.params;
-            const { email, password, username }: User = httpRequest.body;
+            let { email, password, username }: User = httpRequest.body;
+            username = username?.toLowerCase();
+            email = email?.toLowerCase();
 
             const userExists = await this.userRepository
                 .searchUserByEmailOrUsernameWithId({ id, email, username });
