@@ -10,13 +10,13 @@ export class GetByIdUserController implements Controller {
         try {
             const { id } = httpRequest.params;
 
-            const usersExists = await this.userRepository.getById(id);
+            const userExists = await this.userRepository.getById(id);
 
-            if (!usersExists) {
+            if (!userExists) {
                 return notFound('Usuario não encontrado');
             }
 
-            return ok(usersExists);
+            return ok(userExists);
         } catch(error: any) {
             return serverError(error);
         }

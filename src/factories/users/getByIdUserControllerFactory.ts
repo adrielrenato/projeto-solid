@@ -4,10 +4,10 @@ import LogErrorRepository from "../../repositories/logErrorRepository";
 import { UserRepository } from "../../repositories/userRepository";
 
 export const getByIdUserControllerFactory = () => {
-    const GetByIdController = new GetByIdUserController(new UserRepository());
+    const getByIdController = new GetByIdUserController(new UserRepository());
 
     return new LogErrorControllerDecorator(
-        GetByIdController, 
+        getByIdController, 
         new LogErrorRepository()
     );
 }
