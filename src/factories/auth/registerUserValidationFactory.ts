@@ -9,7 +9,6 @@ import { ValidationComposite } from "../../validations/validationComposite";
 export const registerUserValidationFactory = (): ValidationComposite => {
     const validations: Validation[] = [];
 
-    validations.push(new RequiredFieldValidation('name'));
     validations.push(new RequiredFieldValidation('username'));
     validations.push(new RequiredFieldValidation('email'));
     validations.push(new RequiredFieldValidation('password'));

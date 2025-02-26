@@ -3,14 +3,14 @@ import { HttpRequest, HttpResponse } from "../../interfaces/http";
 import { Validation } from "../../interfaces/validation";
 import { IAuthRepository } from "../../repositories/interfaces/interfaceAuthRepository";
 import { IUserRepository } from "../../repositories/interfaces/interfaceUserRepository";
-import { badRequest, conflict, created, serverError } from "../../utils/httpResponses/httpResponse";
+import { badRequest, notFound, ok, serverError, unanthorized } from "../../utils/httpResponses/httpResponse";
 
-export class RegisterUserController implements Controller {
+export class LoginController implements Controller {
     constructor(
         private readonly authRepository: IAuthRepository,
         private readonly validation: Validation,
         private readonly userRepository: IUserRepository
-    ) {}
+    ) { }
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
@@ -20,22 +20,27 @@ export class RegisterUserController implements Controller {
                 return badRequest(error);
             }
 
-            let { username, email, password } = httpRequest.body;
-            username = username?.toLowerCase();
-            email = email?.toLowerCase();
+            const { usernameOrEmail, password } = httpRequest.body;
 
-            const userExists = await this.userRepository.getByColumn([
-                { email: email },
-                { username: username }
-            ]);
+            const userExists = await this.userRepository.getByColumn({
+                where: [
+                    { email: usernameOrEmail },
+                    { username: usernameOrEmail }
+                ],
+                select: ["id", "username", "email", "password"],
+            });
 
-            if (userExists) {
-                return conflict('Email ou username já cadastrados!');
+            if (!userExists) {
+                return notFound('Usuario');
             }
 
-            const user = await this.authRepository.register({ username, email, password });
+            const userLogged = await this.authRepository.login(userExists, password);
 
-            return created(user);
+            if (userLogged instanceof Error) {
+                return unanthorized(userLogged.message);
+            }
+
+            return ok(userLogged);
         } catch(error: any) {
             return serverError(error);
         }
