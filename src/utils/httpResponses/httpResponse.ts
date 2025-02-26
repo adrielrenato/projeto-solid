@@ -8,6 +8,13 @@ export const badRequest = (error: Error): HttpResponse => ({
     body: error
 });
 
+export const unanthorized = (message: string): HttpResponse => ({
+    statusCode: 401,
+    body: {
+        message
+    }
+});
+
 export const notFound = (message: string): HttpResponse => ({
     statusCode: 404,
     body: new NotFoundError(message)
