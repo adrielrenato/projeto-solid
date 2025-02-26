@@ -28,6 +28,10 @@ export class BookRepository implements IBookRepository {
         if (book.description) {
             updateField.description = book.description;
         }
+
+        if (book.author) {
+            updateField.author = book.author;
+        }
     
         return await this.bookRepository.update(id, updateField);
     }    

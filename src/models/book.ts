@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Author } from "./author";
 
 @Entity()
 export class Book {
@@ -10,4 +11,7 @@ export class Book {
 
     @Column({ type: "text" }) // Use "text" para descrições longas
     description?: string;
+
+    @ManyToOne(() => Author, (author) => author.books, { eager: true })
+    author?: Author
 }
