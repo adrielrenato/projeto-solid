@@ -7,6 +7,7 @@ export const addBookValidationFactory = (): ValidationComposite => {
 
     validations.push(new RequiredFieldValidation('name'));
     validations.push(new RequiredFieldValidation('description'));
+    validations.push(new RequiredFieldValidation('author'));
 
     return new ValidationComposite(validations);
 }

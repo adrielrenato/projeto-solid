@@ -9,8 +9,8 @@ export class UpdateBookController implements Controller {
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
             const { id } = httpRequest.params;
-            const { name, description } = httpRequest.body;
-            const bookExists = await this.bookRepository.update(id, { name, description });
+            const { name, description, author } = httpRequest.body;
+            const bookExists = await this.bookRepository.update(id, { name, description, author });
 
             if (!bookExists.affected) {
                 return notFound('Livro');
