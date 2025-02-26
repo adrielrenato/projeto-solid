@@ -3,6 +3,7 @@ import { AppDataSources } from "../database/data-source";
 import { User } from "../models/user";
 import { IUserRepository } from "./interfaces/interfaceUserRepository";
 import bcryptjs from "bcryptjs";
+import { DeleteResult } from "typeorm/browser";
 
 export class UserRepository implements IUserRepository {
     private readonly userRepository = AppDataSources.getRepository(User);
@@ -25,7 +26,7 @@ export class UserRepository implements IUserRepository {
             .andWhere(
                 new Brackets(qb => {
                     qb.where("user.email = :email", { email })
-                    .orWhere("user.username = :username", { username });
+                        .orWhere("user.username = :username", { username });
                 })
             )
             .getOne();
@@ -47,6 +48,10 @@ export class UserRepository implements IUserRepository {
         }
 
         return await this.userRepository.update(id, updateField);
+    }
+
+    async delete(id: string): Promise<DeleteResult> {
+        return await this.userRepository.delete(id);
     }
 
 }

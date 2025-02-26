@@ -1,4 +1,4 @@
-import { UpdateResult } from "typeorm";
+import { DeleteResult, UpdateResult } from "typeorm";
 import { User } from "../../models/user";
 
 export interface IUserRepository {
@@ -7,4 +7,5 @@ export interface IUserRepository {
     list(): Promise<User[] | null>;
     getById(id: string): Promise<User | null>;
     update(id: string, user: User): Promise<UpdateResult>;
+    delete(id: string): Promise<DeleteResult>;
 }
