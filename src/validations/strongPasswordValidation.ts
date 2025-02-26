@@ -6,7 +6,7 @@ export class StrongPasswordValidation implements Validation {
     validate(input: any): Error | void {
         const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-        if (!strongPasswordRegex.test(input['password'])) {
+        if (input['password'] && !strongPasswordRegex.test(input['password'])) {
             return new Error('Sua senha precisa ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, um número e um caractere especial (@, $, !, %, *, ?, &).')
         }
     }

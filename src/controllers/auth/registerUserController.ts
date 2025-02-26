@@ -20,7 +20,9 @@ export class RegisterUserController implements Controller {
                 return badRequest(error);
             }
 
-            const { username, email, password } = httpRequest.body;
+            let { username, email, password } = httpRequest.body;
+            username = username?.toLowerCase();
+            email = email?.toLowerCase();
 
             const userExists = await this.userRepository.getByColumn([
                 { email },
