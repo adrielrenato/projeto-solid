@@ -1,14 +1,15 @@
 import { Controller } from "../../interfaces/controller";
 import { HttpRequest, HttpResponse } from "../../interfaces/http";
 import { Validation } from "../../interfaces/validation";
-import { IBookRepository } from "../../repositories/interfaces/interfaceBookRepository";
+import { Author } from "../../models/author";
+import { IAuthorRepository } from "../../repositories/interfaces/interfaceAuthorRepository";
 import { badRequest, created, serverError } from "../../utils/httpResponses/httpResponse";
 
-export class AddBookController implements Controller {
+export class AddAuthorController implements Controller {
     constructor(
-        private readonly bookRepository: IBookRepository, 
+        private readonly authorRepository: IAuthorRepository, 
         private readonly validation: Validation
-    ) {}
+    ) { }
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
@@ -18,14 +19,14 @@ export class AddBookController implements Controller {
                 return badRequest(error);
             }
 
-            const { name, description, author } = httpRequest.body;
+            const { name, nationality }: Author = httpRequest.body; 
 
-            const book = await this.bookRepository.create({ name, description, author });
-            
-            return created(book);
+            const author = await this.authorRepository.create({ name, nationality });
+
+            return created(author);
         } catch(error: any) {
             return serverError(error);
         }
     }
-
+    
 }

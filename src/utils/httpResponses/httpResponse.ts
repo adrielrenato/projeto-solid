@@ -8,6 +8,13 @@ export const badRequest = (error: Error): HttpResponse => ({
     body: error
 });
 
+export const unanthorized = (message: string): HttpResponse => ({
+    statusCode: 401,
+    body: {
+        message
+    }
+});
+
 export const notFound = (message: string): HttpResponse => ({
     statusCode: 404,
     body: new NotFoundError(message)
@@ -31,4 +38,8 @@ export const created = (data: any): HttpResponse => ({
 export const ok = (data: any): HttpResponse => ({
     statusCode: 200,
     body: data
+});
+
+export const noContent = (): HttpResponse => ({
+    statusCode: 204,
 });
